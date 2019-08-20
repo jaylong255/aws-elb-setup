@@ -40,15 +40,36 @@ If you don't already have a VPC for your system, follow this guide: https://gith
 6. Review it and click 
 7. Expand the details by clicking the arrow below the domain name. Copy everything before `.mydomain.com` in the name field.
 8. Open up the Route53 menu in another tab and go to your hosted zone menu.
-9. 
+9. Click the "Create Record Set" button.
+10. Paste the value of the name into the name field.
+11. Now copy the entire "Value" field from the Certificate Manager page into the "Value" field in the record set form and click the "Create" button.
+12. On the Certificate Manager page, click the "Continue" button. It may take a few minutes to validate. Just keep refreshing until it's ready. It shouldn't take long.
 
 ### IV. Create an Elastic Load Balancer
 >[Elastic Load Balancing (ELB)](https://aws.amazon.com/elasticloadbalancing/) automatically distributes incoming application traffic across multiple targets, such as Amazon EC2 instances, containers, IP addresses, and Lambda functions. It can handle the varying load of your application traffic in a single Availability Zone or across multiple Availability Zones. Elastic Load Balancing offers three types of load balancers that all feature the high availability, automatic scaling, and robust security necessary to make your applications fault tolerant.
-1. 
+1. From the EC2 menu, click on the "Load Balancers" tab.
+2. Click the "Create Load Balancer" button.
+3. On the "Application Load Balancer" card, click the "Create" button.
+4. Give your ELB a descriptive name.
+5. Make it internet-facing, ipv4.
+6. Select HTTPS protocol. Make sure the port is 443. Click the "Add Listener" button.
+7. Add HTTP as well.
+8. Select your VPC from the drop down.
+9. Check the boxes beside your availability zones and select your public subnets from the drop down lists.
+10. Click the "Next: Configure Security... " button.
+11. Select "Choose a certificate from ACM".
+12. Select your certificate from the drop down list.
+13. Click the "Next: Configure Security Groups" button.
+14. Select your VPC security group and click the "Next:..." button.
 
 ### V. Create a Target Group
 >Each [target group](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-target-groups.html) is used to route requests to one or more registered targets. When you create each listener rule, you specify a target group and conditions. When a rule condition is met, traffic is forwarded to the corresponding target group. You can create different target groups for different types of requests. For example, create one target group for general requests and other target groups for requests to the microservices for your application. For more information, see Application Load Balancer Components.
-1. 
+1. Continuing from your ELB creation, name your application target group descriptively
+2. Select "Instance"
+3. Use HTTPS Protocol for the group and the health checks.
+4. Click the "Next: Register Targets" button.
+5. Go ahead and continue for now, we'll add instances in the next step.
+6. Click the "Create" button.
 
 ### VI. Add Instances
 > 
