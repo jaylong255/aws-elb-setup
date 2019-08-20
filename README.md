@@ -72,9 +72,25 @@ If you don't already have a VPC for your system, follow this guide: https://gith
 6. Click the "Create" button.
 
 ### VI. Add Instances
-> 
-1.
+> [Amazon Elastic Compute Cloud (EC2)](https://aws.amazon.com/ec2/) is a web service that provides secure, resizable compute capacity in the cloud. It is designed to make web-scale cloud computing easier for developers.
+1. Create an EC2 instance for the bastion host. Use the Amazon Linux 2 AMI. You can make it a micro, it's not going to serve public traffic. Select the VPC. Select a public subnet. Enable public IP.
+2. Create an EC2 instance for the application. Use the same AMI. Use your own judgement as to what size to make this one. It's going to be handling public load, but the ELB will enable you to spread the load over multiple instances.
+3. Select the VPC. Select a private subnet. Keep public IP disabled. All traffic will go through the ELB.
+4. Install a web server stack on the application instance. You'll need to ssh into the bastion using it's public ip, then ssh into the application from the bastion using it's private ip.
+5. Add the application instance to the target group.
+
 
 ### VII. DNS Records
 >
-1.
+1. Go to the menu for the new hosted zone in Route53.
+2. Click on the A record (or add a new one, if there's not one already)
+3. Point the A record to the Load Balancer.
+4. Select "yes" for alias.
+5. Save it.
+6. Your domain should now point to the application instance. 
+7. 
+
+Next, you're going to want to set up deployments and autoscaling. But those are for another doc.
+
+
+ 
