@@ -90,7 +90,7 @@ If you don't already have a VPC for your system, follow this guide: https://gith
 6. Your domain should now point to the application instance. 
 7. 
 
-Next, you're going to want to set up deployments and autoscaling. But those are for another doc.
+Next, you're going to want to set up deployments and autoscaling, but that princess is in another castle.
 
 
  
